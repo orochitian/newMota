@@ -1,0 +1,186 @@
+html,body{margin: 0; padding: 0; position: relative; height: 100%; user-select:none;}
+$screenSize: 97.78vw;
+$gridSize: 8.89vw;
+p{margin: 0;}
+@mixin center() {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+@keyframes toggle {
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+@keyframes fadeIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes fadeOut {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+#size{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: $gridSize;
+    height: $gridSize;
+}
+#screen{
+    position: relative;
+    width: 100vw;
+    height: 100vw;
+    background: url("../images/wall.png");
+}
+#game{
+    @include center;
+    background: url("../images/bg.png");
+    box-shadow: 0px 0px 10px 1px #000;
+}
+#message{
+    @include center;
+    width: $screenSize;
+    height: $gridSize*3;
+    line-height: $gridSize*3;
+    color: #009f95;
+    #message-inner{
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        font-size: $gridSize/1.5;
+        animation: toggle 2s ease-in-out forwards;
+        background: rgba(0, 0, 0, .8);
+    }
+}
+#dialog{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: $gridSize/2.5;
+    #dialog-inner{
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: rgba(0,0,0,.7);
+        line-height: 2em;
+        width: 100%;
+        height: 100%;
+        animation: fadeIn 1s;
+        overflow-y: scroll;
+    }
+}
+#fight{
+    display: none;
+    @include center;
+    width: $screenSize;
+    height: $gridSize*6;
+    background: rgba(0, 0, 0, .8);
+    #monster,#animation,#hero{
+        float: left;
+        height: 100%;
+    }
+    #monster{
+        width: $gridSize*3.4;
+    }
+    #animation{
+        width: $gridSize*4.19;
+        background: url("../images/fight.gif") no-repeat center;
+        background-size: cover;
+    }
+    #hero{
+        width: $gridSize*3.4;
+    }
+    #monster-icon{
+        height: $gridSize;
+        background: url("../images/monsters/monster10.png") no-repeat center;
+        background-size: $gridSize;
+        padding: $gridSize/2 0;
+    }
+    #hero-icon{
+        height: $gridSize;
+        background: url("../images/herodir/heroDown.png") no-repeat center;
+        background-size: $gridSize;
+        padding: $gridSize/2 0;
+    }
+    .row{
+        height: $gridSize;
+        line-height: $gridSize;
+        padding-left: $gridSize*1.4;
+        color: #fff;
+        font-size: $gridSize/2.2;
+        &.hp{
+            background: url("../images/hpIcon.png") no-repeat $gridSize/3.2 center;
+            background-size: $gridSize;
+        }
+        &.attack{
+            background: url("../images/attackIcon.png") no-repeat $gridSize/2.3 center;
+            background-size: $gridSize*0.75;
+        }
+        &.defense{
+            background: url("../images/defenseIcon.png") no-repeat $gridSize/3.5 center;
+            background-size: $gridSize;
+        }
+    }
+}
+//  控制器样式
+#controller{
+    position: relative;
+    height: $screenSize*0.79;
+    background: #DAA520;
+    #left,#right,#up,#down{
+        position: absolute;
+        background: rgba(0,0,0,.8);
+        text-align: center;
+        color: #fff;
+        &:active{
+            background: rgba(0,0,0,.5);
+        }
+    }
+    #up,#down{
+        width: $screenSize/3;
+        height: $gridSize*3;
+        line-height: $gridSize*3;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+    #down{
+        bottom: 0;
+    }
+    #left,#right{
+        width: $screenSize/2.9;
+        height: $gridSize*2.7;
+        line-height: $gridSize*2.6;
+        top: $gridSize*3;
+        margin: auto 0;
+    }
+    #left{
+        left: 0;
+    }
+    #right{
+        right: 0;
+    }
+}

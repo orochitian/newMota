@@ -1,0 +1,31 @@
+$screenSize: 97.78vw;
+$gridSize: 8.89vw;
+html,body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    user-select:none;
+}
+body{
+    background: url("../images/main_bg.jpg") no-repeat center top;
+    background-size: cover;
+}
+#button-group{
+    padding-top: $gridSize * 7;
+}
+#new,#load,#clear,#exit {
+    width: $gridSize * 4.9;
+    height: $gridSize * 1.25;
+    line-height: $gridSize * 1.25;
+    text-align: center;
+    background: url("../images/button_bg.png") no-repeat center;
+    background-size: cover;
+    font-size: $gridSize * 0.5;
+    color: #fff;
+    margin: $gridSize auto;
+    overflow: hidden;
+    &:active{
+        color: red;
+    }
+}

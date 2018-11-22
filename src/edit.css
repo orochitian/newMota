@@ -1,0 +1,22 @@
+body{background: #666;}
+#modal{width: 352px; overflow: hidden; color: #eee; background: url("images/bg.png"); margin: 50px auto;}
+.grid{width: 32px; height: 32px; float: left; line-height: 32px; text-align: center; cursor: pointer;}
+
+.grid.active.wall{background: url("images/wall.png");}
+.grid.active.wiseMan{background: url("images/npc/wiseMan.png");}
+.grid.active.businessMan{background: url("images/npc/businessMan.png");}
+.grid.active.thief{background: url("images/npc/thief.png");}
+.grid.active.upStair{background: url("images/up.png");}
+.grid.active.downStair{background: url("images/down.png");}
+
+#getMap{margin: 0px auto; display: block;}
+.choose{outline: none; border: none; padding: 3px 5px; cursor: pointer;}
+.choose.active{background: #333; color: #fff;}
+#monster-details,#npc-details,#item-details,#gate-details,#event-details{display: none; padding: 20px;}
+#npc-choose button{
+    position: relative;
+    margin: 10px;
+}
+.choose{
+    margin: 0 5px;
+}
