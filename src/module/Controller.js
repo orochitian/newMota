@@ -16,16 +16,17 @@ export default {
         var nextId = map.grid[nextGrid].id;
         if( nextType === 'gate' && !/^gate(4|5)$/.test(nextId) ) {
             render.openGate(core, nextGrid);
-        }
-        else if( nextType === 'monster' || nextType === 'boss' ) {
+        } else if( nextType === 'monster' || nextType === 'boss' ) {
             render.renderFight(core, nextGrid);
-        }
-        else if( nextType === 'npc' ) {
+        }  else if( nextType === 'transWall' ) {
+            hero.disabled();
+            render.clearGrid(map, nextGrid);
+            hero.init(core);
+        } else if( nextType === 'npc' ) {
             hero.disabled();
             var event = map.grid[nextGrid].event.split('-');
             events[event[0]][event[1]].action(core, nextGrid);
-        }
-        else if( nextType == 'item' ) {
+        } else if( nextType == 'item' ) {
             if( /^item(04|05|06|07)$/.test(nextId) ) {
                 hero[items[nextId].for] += items[nextId].value * map.area
             } else {
@@ -33,16 +34,23 @@ export default {
             }
             render.renderMsg(items[nextId].name);
             render.delete(map, nextGrid);
-        }
-        else if( nextType === 'upStair' ) {
+        } else if( nextType == 'event' ) {
+            var event = nextId.split('-');
+            events[event[0]][event[1]].action(core, nextGrid);
+            hero.disabled();
+        } else if( nextType === 'upStair' ) {
             core.mapIndex++;
             hero.position = core.maps[core.mapIndex].downUp;
             render.renderMap(core);
-        }
-        else if( nextType === 'downStair' ) {
+        } else if( nextType === 'downStair' ) {
             core.mapIndex--;
-            core.hero.position = core.maps[core.mapIndex].upDown;
+            hero.position = core.maps[core.mapIndex].upDown;
             render.renderMap(core);
+        } else if( nextType === 'anlei' ) {
+            render.renderHurt();
+            hero.hp = Math.ceil(hero.hp / 2);
+            hero.disabled();
+            hero.init(core);
         }
     },
     canMove: function (core, nextPosition, nextGrid) {
@@ -52,7 +60,7 @@ export default {
         var map = core.maps[core.mapIndex];
         var nextType = map.grid[nextGrid].type;
         this.trigger(core, nextGrid);
-        if( !nextType || nextType === 'event' || nextType === 'item' ) {
+        if( !nextType || nextType === 'event' || nextType === 'item' || nextType === 'anlei' ) {
             return true;
         }
         return false;
@@ -114,9 +122,9 @@ export default {
                 return;
             }
             setTimeout(function () {
-                requestAnimationFrame(animate);
+                animate();
             }, 50)
         }
-        requestAnimationFrame(animate);
+        animate();
     }
 }

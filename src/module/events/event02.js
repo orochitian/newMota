@@ -18,7 +18,6 @@ export default [
             var temp = `
                 <p style="padding: ${size/2}px ${size}px 0 ${size}px"> <span><img src=${thief}></span>： ${this.msg[0]}</p>
                 <p style="padding: 0 ${size}px; text-indent: 3em;"> ${this.msg[1]} </p>
-                <p style="text-align: right; padding: ${size/2}px"><button id="close-dialog" type="button">结束对话</button></p>
             `
             render.renderDialog(temp, function () {
                 render.clearGrid(core.maps[core.mapIndex], index);
@@ -37,7 +36,9 @@ export default [
            谢谢你救了我，我可以用祝福魔法提升你3%的攻击力和防御力，现在就提升吗？<br>
          `,
         action: function (core, index) {
-            alert(msg);
+            render.renderDialog('这是一个测试事件！', () => {
+                core.hero.init(core);
+            })
         }
     },
     /*
@@ -50,7 +51,6 @@ export default [
            谢谢你救了我，作为感谢，我将身上的金币都赠与你。再见！<br>
          `,
         action: function (core, index) {
-
             core.hero.disabled();
         }
     }

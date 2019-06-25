@@ -5,6 +5,7 @@ import gates from './Gates';
 import monsters from './Monsters';
 import items from './Items';
 import npcs from './Npcs';
+import events from "./Events";
 
 export default {
     draw: function (src, callback) {
@@ -60,8 +61,10 @@ export default {
             if( times === heroHitTimes ) {
                 oFight.style.display = 'none';
                 _this.renderMsg('战斗胜利，获得' + monster.money + '金币');
+
+                //  战胜怪物后开门的逻辑
                 var openGate = next.clear;
-                if( next.clear ) {
+                if( openGate ) {
                     var opens = openGate.split(',');
                     map.clear.splice( map.clear.indexOf(openGate), 1 );
                     if( map.clear.indexOf(openGate) === -1 ) {
@@ -71,6 +74,14 @@ export default {
                     }
                 }
                 _this.clearGrid(map, index);
+
+                //  触发战斗后特定事件
+                if( next.event ) {
+                    var event = next.event.split('-');
+                    events[event[0]][event[1]].action(core);
+                    hero.disabled();
+                }
+
                 setTimeout(function () {
                     hero.init(core);
                 }, 400);
@@ -80,6 +91,13 @@ export default {
         hero.disabled();
         hero.hp -= monsterDamage*(heroHitTimes-1);
         hero.money += monster.money;
+    },
+    renderHurt() {
+        var oHurt = document.getElementById('hurt');
+        oHurt.innerHTML = '';
+        var inner = document.createElement('div');
+        inner.id = 'hurt-inner';
+        oHurt.appendChild(inner);
     },
     renderMsg: function (msg) {
         var oMessage = document.getElementById('message');
@@ -95,7 +113,8 @@ export default {
         var inner = document.createElement('div');
         oDialog.appendChild(inner);
         inner.id = 'dialog-inner';
-        inner.innerHTML = msg;
+        var close = `<p style="text-align: right; padding: ${size/2}px"><button id="close-dialog" type="button">结束对话</button></p>`;
+        inner.innerHTML = msg + close;
         document.getElementById('close-dialog').addEventListener('click', function () {
             inner.style.animation = 'fadeOut 1s forwards';
             callback();
@@ -124,6 +143,8 @@ export default {
         for( var i=0; i<map.grid.length; i++ ) {
             var mapGrid = map.grid[i];
             if( mapGrid.type === 'wall' ) {
+                this.renderGrid(walls.wall, i);
+            } else if( mapGrid.type === 'transWall' ) {
                 this.renderGrid(walls.wall, i);
             } else if( mapGrid.type === 'monster' ) {
                 this.renderGrid(monsters[mapGrid.id].img, i);
@@ -158,10 +179,10 @@ export default {
                 return;
             }
             setTimeout(function () {
-                requestAnimationFrame(animate);
-            }, 80);
+                animate();
+            }, 60);
         }
-        requestAnimationFrame(animate);
+        animate();
         this.delete(map, index);
     },
     openGate: function (core, index) {
@@ -201,13 +222,13 @@ export default {
             }
             steps++;
             setTimeout(function () {
-                requestAnimationFrame(animate);
+                animate();
             }, 60);
         }
         requestAnimationFrame(animate);
         setTimeout(function () {
             hero.disabled();
-        }, 0);
+        }, 10);
         this.delete(map, index);
     }
 }

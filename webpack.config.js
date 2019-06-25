@@ -1,6 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     entry: {
         flexible: __dirname +'/src/vendors/flexible.min.js',
@@ -12,6 +11,7 @@ module.exports = {
         filename: 'js/[name].js'
     },
     mode: 'development',
+    // mode: 'production',
     devtool: 'cheap-module-eval-source-map',
     module:{
         rules:[
@@ -28,7 +28,7 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options: {
-                            limit: '20480',
+                            limit: 1024,
                             publicPath: '../',
                             name: 'images/[name].[ext]'
                         }
@@ -38,7 +38,6 @@ module.exports = {
         ]
     },
     plugins:[
-        // new UglifyJsPlugin(),
         new ExtractTextPlugin({
             filename: 'css/[name].css'
         }),

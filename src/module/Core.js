@@ -11,9 +11,8 @@ if( oGame ) {
 function Core (hero, maps) {
     this.hero = hero;
     this.maps = maps;
-    this.mapIndex = 2;
+    this.mapIndex = 3;
 }
-
 
 Core.prototype.gameInit = function () {
     render.renderMap(this);

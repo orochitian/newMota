@@ -1,8 +1,8 @@
-import tools from "../tools";
+import render from '../Render';
 import wiseMan from '../../images/npc/wiseMan.png';
 import mowang from '../../images/monsters/monster33.png';
 import thief from '../../images/npc/thief.png';
-import zhujue from '../../images/hero/heroDown.png';
+import zhujue from '../../images/herodir/heroDown.png';
 
 export default [
     /*
@@ -19,18 +19,16 @@ export default [
            <span class="gray"><img src="${thief}"></span>： 。。。。。喂, 醒醒<br>
          `,
         action: function (core, index) {
-            tools.eventRender(this.msg, function () {
-                var map = core.maps[core.mapIndex];
-                map.events.splice(index, 1);
+            render.renderDialog(this.msg, function () {
+                render.delete(core.maps[core.mapIndex], index);
+                core.mapIndex = 2;
                 core.hero.position = 69;
                 core.hero.hp = 400;
                 core.hero.attack = 10;
                 core.hero.defense = 10;
-                core.render(core.maps[--core.mapIndex], core.hero);
-                core.hero.init();
-                tools.domRender(core.hero, core.mapIndex);
+                render.renderMap(core);
+                core.hero.init(core);
             });
-            core.hero.disabled();
         }
     },
     /*
@@ -43,7 +41,7 @@ export default [
            我可以给你怪物手册，它可以预测出当前楼层各类怪物对你的伤害<br>
          `,
         action: function (core, index) {
-            tools.eventRender(this.msg, function () {
+            render.renderDialog(this.msg, function () {
                 var map = core.maps[core.mapIndex];
                 map.npc.splice(index, 1);
                 core.hero.monsterMenu++;

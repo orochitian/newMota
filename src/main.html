@@ -12,14 +12,19 @@
     <title>魔塔</title>
 </head>
 <body>
-<!--<div id="mask">-->
-    <!--<h4>游戏加载中...</h4>-->
-<!--</div>-->
+
 <div id="size"></div>
+
 <div id="screen">
+    <!-- 游戏主画面 -->
     <canvas id="game"></canvas>
+    <!-- 消息弹层 -->
     <div id="message"></div>
+    <!-- 对话弹层 -->
     <div id="dialog"></div>
+    <!-- 伤害弹层 -->
+    <div id="hurt"></div>
+    <!-- 战斗画面 -->
     <div id="fight">
         <div id="monster">
             <div id="monster-icon"></div>
@@ -36,6 +41,7 @@
         </div>
     </div>
 </div>
+
 <div id="operation">
     <div id="controller">
         <div id="left">←</div>
@@ -43,9 +49,7 @@
         <div id="right">→</div>
         <div id="down">↓</div>
     </div>
-    <!--<div class="menu">-->
-        <!--<button id="save" type="button">保存进度</button>-->
-    <!--</div>-->
 </div>
+
 </body>
 </html>

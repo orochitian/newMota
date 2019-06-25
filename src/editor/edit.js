@@ -1,4 +1,5 @@
 
+
 var choose = 'wall';
 $('.choose').click(function () {
     choose = $(this).attr('id');
@@ -28,16 +29,18 @@ var opens = function (option) {
         move: false,
         resize: false,
         closeBtn: 1,
-        content: ''
-    }, option)
+        content: '',
+        area: [400, 'auto']
+    }, option);
     layer.open(options);
 }
 
 var current = 0;
 
+//  编辑地图
 $('#modal').on('click', '.grid', function () {
     var $this = $(this);
-    current = $this.attr('index')*1;
+    current = $this.attr('index') * 1;
     if( $this.hasClass('active') ) {
         layer.confirm('是否清除当前坐标对象', function (index) {
             $this.attr('class', 'grid').css('background', '');
@@ -49,7 +52,7 @@ $('#modal').on('click', '.grid', function () {
         });
         return;
     }
-    if( choose === 'wall' || choose === 'upStair' || choose === 'downStair' ) {
+    if(  /^wall|upStair|downStair|anlei|transWall$/.test(choose)  ) {
         $this.addClass('active').addClass(choose);
         map.grid[current].type =  choose;
     } else if( choose === 'wiseMan' || choose === 'businessMan' || choose === 'thief') {
@@ -80,7 +83,7 @@ $('#modal').on('click', '.grid', function () {
                     map.clear.push($('#clear-index').val());
                 }
                 if( $('#monster-event').val() ) {
-                    map.grid[current].event = $('#monster-event').val();
+                    map.grid[current].event = 'event' + $('#monster-event').val();
                 }
                 layer.close(index);
             }
@@ -126,6 +129,8 @@ $('#modal').on('click', '.grid', function () {
         })
     }
 });
+
+//  生成地图
 $('#getMap').click(function () {
     //  地图索引
     map.index = $('#mapIndex').val() * 1 || 1;

@@ -1,0 +1,51 @@
+body{background: #333;}
+.container{
+    width: 960px;
+    margin: 0 auto;
+}
+#modal{width: 352px; overflow: hidden; color: #eee; background: url("../images/bg.png"); margin: 50px auto; box-shadow: 0 0 10px #fff; padding: 5px;}
+.grid{width: 32px; height: 32px; float: left; line-height: 32px; text-align: center; cursor: pointer;}
+
+.grid.active.wall{background: url("../images/wall.png");}
+.grid.active.transWall{background: url("../images/wall.png"); opacity: .5;}
+.grid.active.anlei{background: darkred;}
+.grid.active.wiseMan{background: url("../images/npc/wiseMan.png");}
+.grid.active.businessMan{background: url("../images/npc/businessMan.png");}
+.grid.active.thief{background: url("../images/npc/thief.png");}
+.grid.active.upStair{background: url("../images/up.png");}
+.grid.active.downStair{background: url("../images/down.png");}
+
+#getMap{margin: 0px auto; display: block;}
+.choose{outline: none; border: none; padding: 3px 10px; cursor: pointer;}
+.choose.active{background: cornflowerblue; color: #fff;}
+#monster-details,#npc-details,#item-details,#gate-details,#event-details{display: none; padding: 20px;}
+#npc-choose button{
+    position: relative;
+    margin: 10px;
+}
+.choose{
+    margin: 0 5px;
+}
+
+.form-item{
+    margin-top: 20px;
+}
+.form-item label{
+    margin-left: 100px;
+    display: inline-block;
+    width: 200px;
+    color: #eee;
+}
+input{
+    width: 400px;
+}
+.button-group{
+    vertical-align: top;
+    display: inline-block;
+    width: 400px;
+    line-height: 2.5em;
+}
+.modal-container label{
+    display: inline-block;
+    margin-bottom: 6px;
+}
