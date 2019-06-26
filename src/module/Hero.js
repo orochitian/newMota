@@ -10,6 +10,7 @@ let moveInit = function (core, direct) {
         if( touchTime ) {
             return;
         }
+        document.getElementById('controller').className = direct;
         touchTime = setInterval(function () {
             controller.heroMove(core, direct);
         }, 50);
@@ -18,17 +19,18 @@ let moveInit = function (core, direct) {
     document.getElementById(direct).ontouchend = function () {
         clearInterval(touchTime);
         touchTime = null;
+        document.getElementById('controller').className = '';
     }
 }
 
 //  英雄原型
 function Hero () {
-    this.position = 0;
+    this.position = 115;
     this.img = heroSource;
     this.direction = 'down';
 
     this.hp = 40000;
-    this.attack = 200;
+    this.attack = 10;
     this.defense = 10;
     this.money = 0;
 

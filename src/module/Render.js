@@ -18,6 +18,12 @@ export default {
     delete: function (map, index) {
         map.grid[index] = {i: index};
     },
+    renderStatus(core) {
+        document.getElementById('status-hp').innerHTML = core.hero.hp;
+        document.getElementById('status-attack').innerHTML = core.hero.attack;
+        document.getElementById('status-defense').innerHTML = core.hero.defense;
+        document.getElementById('status-money').innerHTML = core.hero.money;
+    },
     renderFight: function (core, index) {
         var hero = core.hero;
         var map = core.maps[core.mapIndex];
@@ -85,6 +91,7 @@ export default {
                 setTimeout(function () {
                     hero.init(core);
                 }, 400);
+                _this.renderStatus(core);
                 clearInterval(timmer);
             }
         }, 300);
@@ -142,9 +149,7 @@ export default {
         var map = core.maps[core.mapIndex];
         for( var i=0; i<map.grid.length; i++ ) {
             var mapGrid = map.grid[i];
-            if( mapGrid.type === 'wall' ) {
-                this.renderGrid(walls.wall, i);
-            } else if( mapGrid.type === 'transWall' ) {
+            if( mapGrid.type === 'wall' || mapGrid.type === 'transWall' ) {
                 this.renderGrid(walls.wall, i);
             } else if( mapGrid.type === 'monster' ) {
                 this.renderGrid(monsters[mapGrid.id].img, i);
@@ -159,6 +164,11 @@ export default {
             }
         }
         this.renderHero(core);
+    },
+    renderWall: function (i) {
+        this.draw(walls.wall, function (oImg) {
+            ctx.drawImage(oImg, 0, 0, 32, 32, grid[i][0], grid[i][1], size, size);
+        });
     },
     clearMap: function () {
         var mapSize = size * 11;

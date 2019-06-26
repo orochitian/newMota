@@ -49,6 +49,7 @@ p{margin: 0;}
     width: 100vw;
     height: 100vw;
     background: url("../images/wall.png");
+    z-index: 9;
 }
 #game{
     @include center;
@@ -156,37 +157,79 @@ p{margin: 0;}
         }
     }
 }
+.status{
+    width: 40vw;
+    font-size: .3rem;
+    border-bottom: 1px dashed #666;
+    color: #333;
+    height: 1rem;
+    line-height: 1rem;
+    padding-top: .5rem;
+    margin-left: .5rem;
+}
+#operation{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding-top: 100vw;
+    box-sizing: border-box;
+    .inner{
+        background-color: rgb(54, 66, 74);
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: #EECF7C;
+    }
+}
 //  控制器样式
 #controller{
-    position: relative;
-    height: $screenSize*0.79;
-    background: #DAA520;
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    left: 0;
+    right: 0;
+    top: 10vw;
+    margin: 0 auto;
+    background: url("../images/direction_normal.png") no-repeat center;
+    background-size: 100% 100%;
+    &.left{
+        background: url("../images/direction_left.png") no-repeat center;
+        background-size: 100% 100%;
+    }
+    &.right{
+        background: url("../images/direction_right.png") no-repeat center;
+        background-size: 100% 100%;
+    }
+    &.up{
+        background: url("../images/direction_up.png") no-repeat center;
+        background-size: 100% 100%;
+    }
+    &.down{
+        background: url("../images/direction_down.png") no-repeat center;
+        background-size: 100% 100%;
+    }
+
     #left,#right,#up,#down{
         position: absolute;
-        background: rgba(0,0,0,.8);
-        text-align: center;
-        color: #fff;
-        &:active{
-            background: rgba(0,0,0,.5);
-        }
     }
     #up,#down{
-        width: $screenSize/3;
-        height: $gridSize*3;
-        line-height: $gridSize*3;
+        width: $gridSize*1.5;
+        height: $gridSize*2.2;
         left: 0;
         right: 0;
-        margin: 0 auto;
+        margin: .3rem auto;
     }
     #down{
         bottom: 0;
     }
     #left,#right{
-        width: $screenSize/2.9;
-        height: $gridSize*2.7;
-        line-height: $gridSize*2.6;
-        top: $gridSize*3;
-        margin: auto 0;
+        width: $gridSize*2.2;
+        height: $gridSize*1.5;
+        top: 0;
+        bottom: 0;
+        margin: auto .3rem;
     }
     #left{
         left: 0;

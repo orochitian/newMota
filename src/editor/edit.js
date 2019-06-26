@@ -52,7 +52,7 @@ $('#modal').on('click', '.grid', function () {
         });
         return;
     }
-    if(  /^wall|upStair|downStair|anlei|transWall$/.test(choose)  ) {
+    if(  /^wall|upStair|downStair|anlei|transWall|airWall$/.test(choose)  ) {
         $this.addClass('active').addClass(choose);
         map.grid[current].type =  choose;
     } else if( choose === 'wiseMan' || choose === 'businessMan' || choose === 'thief') {

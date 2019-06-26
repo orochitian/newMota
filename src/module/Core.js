@@ -11,11 +11,12 @@ if( oGame ) {
 function Core (hero, maps) {
     this.hero = hero;
     this.maps = maps;
-    this.mapIndex = 3;
+    this.mapIndex = 1;
 }
 
 Core.prototype.gameInit = function () {
     render.renderMap(this);
+    render.renderStatus(this);
     this.hero.init(this);
 }
 

@@ -28,6 +28,23 @@ export default [
     },
     /*
     *   事件 1
+    *   与贤者对话，可以获得2000金币。
+    * */
+    {
+        msg: `
+           <span class="red"><img src="${wiseMan}"></span>： 
+           谢谢你救了我，为感谢你的帮助，请收下这些礼物（1000金币）<br>
+         `,
+        action: function (core, index) {
+            render.renderDialog(msg, () => {
+                core.hero.money += 1000;
+                core.hero.init(core);
+            });
+            core.hero.disabled();
+        }
+    },
+    /*
+    *   事件 2
     *   与商人对话，可以获得3%攻击力和防御力的提升。
     * */
     {
@@ -39,19 +56,6 @@ export default [
             render.renderDialog('这是一个测试事件！', () => {
                 core.hero.init(core);
             })
-        }
-    },
-    /*
-    *   事件 2
-    *   与贤者对话，可以获得2000金币。
-    * */
-    {
-        msg: `
-           <span class="red"><img src="${wiseMan}"></span>： 
-           谢谢你救了我，作为感谢，我将身上的金币都赠与你。再见！<br>
-         `,
-        action: function (core, index) {
-            core.hero.disabled();
         }
     }
 ]

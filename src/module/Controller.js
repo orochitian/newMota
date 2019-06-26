@@ -18,19 +18,21 @@ export default {
             render.openGate(core, nextGrid);
         } else if( nextType === 'monster' || nextType === 'boss' ) {
             render.renderFight(core, nextGrid);
-        }  else if( nextType === 'transWall' ) {
+        } else if( nextType === 'transWall' ) {
             hero.disabled();
             render.clearGrid(map, nextGrid);
             hero.init(core);
+        } else if( nextType === 'airWall' ) {
+            render.renderWall(nextGrid);
         } else if( nextType === 'npc' ) {
             hero.disabled();
             var event = map.grid[nextGrid].event.split('-');
             events[event[0]][event[1]].action(core, nextGrid);
         } else if( nextType == 'item' ) {
             if( /^item(04|05|06|07)$/.test(nextId) ) {
-                hero[items[nextId].for] += items[nextId].value * map.area
+                hero[items[nextId].for] += items[nextId].value * map.area;
             } else {
-                hero[items[nextId].for] += items[nextId].value
+                hero[items[nextId].for] += items[nextId].value;
             }
             render.renderMsg(items[nextId].name);
             render.delete(map, nextGrid);
@@ -41,16 +43,24 @@ export default {
         } else if( nextType === 'upStair' ) {
             core.mapIndex++;
             hero.position = core.maps[core.mapIndex].downUp;
+            hero.disabled();
             render.renderMap(core);
+            hero.init(core);
         } else if( nextType === 'downStair' ) {
             core.mapIndex--;
             hero.position = core.maps[core.mapIndex].upDown;
+            hero.disabled();
             render.renderMap(core);
+            hero.init(core);
         } else if( nextType === 'anlei' ) {
             render.renderHurt();
             hero.hp = Math.ceil(hero.hp / 2);
             hero.disabled();
             hero.init(core);
+        }
+
+        if( nextType !== 'monster' && nextType !== 'boss' ) {
+            render.renderStatus(core);
         }
     },
     canMove: function (core, nextPosition, nextGrid) {

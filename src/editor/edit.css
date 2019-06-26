@@ -8,6 +8,7 @@ body{background: #333;}
 
 .grid.active.wall{background: url("../images/wall.png");}
 .grid.active.transWall{background: url("../images/wall.png"); opacity: .5;}
+.grid.active.airWall{background: url("../images/wall.png"); opacity: .5;}
 .grid.active.anlei{background: darkred;}
 .grid.active.wiseMan{background: url("../images/npc/wiseMan.png");}
 .grid.active.businessMan{background: url("../images/npc/businessMan.png");}
