@@ -8,6 +8,31 @@ var steps = 0;
 var heroImg = new Image();
 heroImg.src = heroSource;
 
+function getArea(grid) {
+    let left, right, top, bottom;
+    if( grid % 11 === 0 ) {
+        left = null;
+        right = grid + 1;
+    } else if( grid % 11 === 10 ) {
+        right = null;
+        left = grid -1;
+    } else {
+        left = grid - 1;
+        right = grid + 1;
+    }
+    if( grid < 11 ) {
+        top = null;
+        bottom = grid + 11;
+    } else if( grid > 109 ) {
+        bottom = null;
+        top = grid - 11;
+    } else {
+        top = grid - 11;
+        bottom = grid + 11;
+    }
+    return {left, right, top, bottom}
+}
+
 export default {
     trigger: function (core, nextGrid) {
         var map = core.maps[core.mapIndex];
@@ -53,13 +78,46 @@ export default {
             render.renderMap(core);
             hero.init(core);
         } else if( nextType === 'anlei' ) {
-            render.renderHurt();
-            hero.hp = Math.ceil(hero.hp / 2);
-            hero.disabled();
-            hero.init(core);
+            let grids = Object.values(getArea(nextGrid));
+            let gridArr = [];
+            let hurt = null;
+            for( let i=0; i<grids.length; i++ ) {
+                let grid = grids[i];
+                if( grid && map.grid[grid].type === 'monster' ) {
+                    gridArr.push(map.grid[grid].id);
+                } else {
+                    gridArr.push(null);
+                }
+            }
+            //  判断周围是有具备触发暗雷条件的怪物
+            //  守卫比较特殊，周围必须出现2个或2个以上的守卫才触发暗雷
+            function isRepeat() {
+                let repeat = 0;
+                for( let i=0; i<gridArr.length; i++ ) {
+                    if( gridArr[i] === 'monster01' ) {
+                        repeat++;
+                    }
+                }
+                if( repeat > 1 ) {
+                    return true;
+                }
+                return false;
+            }
+            if( gridArr.includes('monster01') && isRepeat() ) {
+                hurt = hero.hp / 2;
+            } else if( gridArr.includes('monster02') ) {
+                hurt = hero.hp - 200;
+            }
+            //  hurt 表示已经触发了暗雷
+            if( hurt ) {
+                render.renderHurt();
+                hero.hp = hurt;
+                hero.disabled();
+                hero.init(core);
+            }
         }
-
-        if( nextType !== 'monster' && nextType !== 'boss' ) {
+        //  除了打怪外，其他事件触发更新角色状态界面。因为打怪需要战斗结束后再更新界面。
+        if( nextType && !/^monster|boss|npc$/.test(nextType) ) {
             render.renderStatus(core);
         }
     },
@@ -127,7 +185,7 @@ export default {
             ctx.drawImage(heroImg, steps*32, imgPos, 32, 32, moveX+=speedX, moveY+=speedY, size, size);
             if( steps > 3 ) {
                 steps = 0;
-                ctx.clearRect(prev[0], prev[1], size, size);
+                // ctx.clearRect(prev[0], prev[1], size, size);
                 ctx.drawImage(heroImg, steps*32, imgPos, 32, 32, next[0], next[1], size, size);
                 return;
             }

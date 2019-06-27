@@ -16,8 +16,8 @@ export default [
         ],
         action: function (core, index) {
             var temp = `
-                <p style="padding: ${size/2}px ${size}px 0 ${size}px"> <span><img src=${thief}></span>： ${this.msg[0]}</p>
-                <p style="padding: 0 ${size}px; text-indent: 3em;"> ${this.msg[1]} </p>
+                <p> <span><img src=${thief}></span>： ${this.msg[0]}</p>
+                <p> ${this.msg[1]} </p>
             `
             render.renderDialog(temp, function () {
                 render.clearGrid(core.maps[core.mapIndex], index);
@@ -36,11 +36,13 @@ export default [
            谢谢你救了我，为感谢你的帮助，请收下这些礼物（1000金币）<br>
          `,
         action: function (core, index) {
-            render.renderDialog(msg, () => {
+            render.renderDialog(this.msg, () => {
+                render.clearGrid(core.maps[core.mapIndex], index);
                 core.hero.money += 1000;
+                render.renderStatus(core);
+                render.renderMsg('获得1000金币');
                 core.hero.init(core);
             });
-            core.hero.disabled();
         }
     },
     /*
@@ -53,9 +55,15 @@ export default [
            谢谢你救了我，我可以用祝福魔法提升你3%的攻击力和防御力，现在就提升吗？<br>
          `,
         action: function (core, index) {
-            render.renderDialog('这是一个测试事件！', () => {
+            render.renderConfirm(this.msg, () => {
+                core.hero.attack += Math.ceil(core.hero.attack * 0.03);
+                core.hero.defense += Math.ceil(core.hero.defense * 0.03);
+                render.renderStatus(core);
+                render.clearGrid(core.maps[core.mapIndex], index);
                 core.hero.init(core);
-            })
+            }, () => {
+                core.hero.init(core);
+            });
         }
     }
 ]

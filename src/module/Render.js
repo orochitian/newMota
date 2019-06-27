@@ -19,10 +19,14 @@ export default {
         map.grid[index] = {i: index};
     },
     renderStatus(core) {
-        document.getElementById('status-hp').innerHTML = core.hero.hp;
-        document.getElementById('status-attack').innerHTML = core.hero.attack;
-        document.getElementById('status-defense').innerHTML = core.hero.defense;
-        document.getElementById('status-money').innerHTML = core.hero.money;
+        let hero = core.hero;
+        document.getElementById('status-hp').innerHTML = hero.hp;
+        document.getElementById('status-attack').innerHTML = hero.attack;
+        document.getElementById('status-defense').innerHTML = hero.defense;
+        document.getElementById('status-money').innerHTML = hero.money;
+        document.getElementById('key-yellow').innerHTML = hero.yellowKey;
+        document.getElementById('key-blue').innerHTML = hero.blueKey;
+        document.getElementById('key-red').innerHTML = hero.redKey;
     },
     renderFight: function (core, index) {
         var hero = core.hero;
@@ -125,6 +129,22 @@ export default {
         document.getElementById('close-dialog').addEventListener('click', function () {
             inner.style.animation = 'fadeOut 1s forwards';
             callback();
+        });
+    },
+    renderConfirm: function (msg, confirmCb, cancelCb) {
+        var oDialog = document.getElementById('dialog');
+        oDialog.innerHTML = '';
+        var inner = document.createElement('div');
+        oDialog.appendChild(inner);
+        inner.id = 'dialog-inner';
+        inner.innerHTML = msg + `<div class="confirm-btn-row"><button id="confirm-dialog" type="button">确定</button> <button id="close-dialog" type="button">取消</button></div>`;
+        document.getElementById('confirm-dialog').addEventListener('click', function () {
+            inner.style.animation = 'fadeOut 1s forwards';
+            confirmCb();
+        });
+        document.getElementById('close-dialog').addEventListener('click', function () {
+            inner.style.animation = 'fadeOut 1s forwards';
+            cancelCb();
         });
     },
     renderHero: function (core) {

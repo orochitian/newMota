@@ -93,6 +93,9 @@ p{margin: 0;}
     color: #fff;
     font-size: $gridSize/2.5;
     #dialog-inner{
+        letter-spacing: 1px;
+        padding: 16px;
+        box-sizing: border-box;
         position: absolute;
         left: 0;
         top: 0;
@@ -102,6 +105,16 @@ p{margin: 0;}
         height: 100%;
         animation: fadeIn 1s;
         overflow-y: scroll;
+        p{
+            text-indent: .7rem;
+        }
+    }
+}
+.confirm-btn-row{
+    text-align: right;
+    margin-top: .5rem;
+    button{
+        margin-right: .5rem;
     }
 }
 #fight{
@@ -158,14 +171,66 @@ p{margin: 0;}
     }
 }
 .status{
-    width: 40vw;
-    font-size: .3rem;
-    border-bottom: 1px dashed #666;
-    color: #333;
-    height: 1rem;
-    line-height: 1rem;
-    padding-top: .5rem;
-    margin-left: .5rem;
+    margin-top: 2px;
+    height: .7rem;
+    line-height: .7rem;
+    p{
+        float: left;
+        width: 25%;
+        font-size: .3rem;
+        text-align: center;
+        span{
+            color: cornflowerblue;
+        }
+    }
+}
+.keys{
+    padding-top: 10px;
+    height: .6rem;
+    p{
+        float: left;
+        width: 23%;
+        font-size: .3rem;
+        text-align: center;
+        &#items, &#chuansong, &#menu{
+            width: 10%;
+            height: .6rem;
+        }
+        &#chuansong{
+            background: url("../images/items/item08.png") no-repeat center;
+            background-size: .6rem .6rem;
+        }
+        &#items{
+            background: url("../images/items.png") no-repeat center;
+            background-size: .6rem .6rem;
+        }
+        &#menu{
+            background: url("../images/menu.png") no-repeat center;
+            background-size: .6rem .6rem;
+        }
+    }
+    span{
+        display: inline-block;
+        color: cornflowerblue;
+        vertical-align: middle;
+    }
+    .icon{
+        width: .6rem;
+        height: .6rem;
+        line-height: .6rem;
+    }
+    .icon.yellow{
+        background: url("../images/items/item01.png") no-repeat;
+        background-size: cover;
+    }
+    .icon.blue{
+        background: url("../images/items/item02.png") no-repeat;
+        background-size: cover;
+    }
+    .icon.red{
+        background: url("../images/items/item03.png") no-repeat;
+        background-size: cover;
+    }
 }
 #operation{
     position: absolute;
@@ -190,7 +255,7 @@ p{margin: 0;}
     height: 60vw;
     left: 0;
     right: 0;
-    top: 10vw;
+    top: 1.5rem;
     margin: 0 auto;
     background: url("../images/direction_normal.png") no-repeat center;
     background-size: 100% 100%;

@@ -25,12 +25,12 @@ let moveInit = function (core, direct) {
 
 //  英雄原型
 function Hero () {
-    this.position = 115;
+    this.position = 112;
     this.img = heroSource;
     this.direction = 'down';
 
-    this.hp = 40000;
-    this.attack = 10;
+    this.hp = 400;
+    this.attack = 300;
     this.defense = 10;
     this.money = 0;
 
@@ -38,6 +38,7 @@ function Hero () {
     this.blueKey = 10;
     this.redKey = 10;
     this.chuansong = 0;
+    this.monsterMenu = 0;
 }
 
 Hero.prototype.init = function(core) {

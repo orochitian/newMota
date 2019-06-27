@@ -75,7 +75,7 @@ $('#modal').on('click', '.grid', function () {
             btn: ['确定', '取消'],
             yes: function (index) {
                 $this.addClass('active').addClass(choose);
-                $this.css('background', 'url("images/monsters/monster'+$('#monster-id').val()+'.png")');
+                $this.css('background', 'url("../images/monsters/monster'+$('#monster-id').val()+'.png")');
                 map.grid[current].type = choose;
                 map.grid[current].id = 'monster' + $('#monster-id').val();
                 if( $('#clear-index').val() ) {
@@ -95,7 +95,7 @@ $('#modal').on('click', '.grid', function () {
             btn: ['确定', '取消'],
             yes: function (index) {
                 $this.addClass('active').addClass(choose);
-                $this.css('background', 'url("images/items/item'+$('#item-id').val()+'.png")');
+                $this.css('background', 'url("../images/items/item'+$('#item-id').val()+'.png")');
                 map.grid[current].type = choose;
                 map.grid[current].id = 'item' + $('#item-id').val();
                 layer.close(index);
@@ -108,7 +108,7 @@ $('#modal').on('click', '.grid', function () {
             btn: ['确定', '取消'],
             yes: function (index) {
                 $this.addClass('active').addClass(choose);
-                $this.css('background', 'url("images/gate'+$('#gate-id').val()+'.png")');
+                $this.css('background', 'url("../images/gate'+$('#gate-id').val()+'.png")');
                 map.grid[current].type = choose;
                 map.grid[current].id = 'gate' + $('#gate-id').val();
                 layer.close(index);

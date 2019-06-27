@@ -44,16 +44,32 @@
 
 <div id="operation">
     <div class="inner">
+        <!-- 虚拟十字键 -->
         <div id="controller">
             <div id="left"></div>
             <div id="up"></div>
             <div id="right"></div>
             <div id="down"></div>
         </div>
-        <div class="status">生命： <span id="status-hp"></span></div>
-        <div class="status">攻击： <span id="status-attack"></span></div>
-        <div class="status">防御： <span id="status-defense"></span></div>
-        <div class="status">金钱： <span id="status-money"></span></div>
+
+        <!-- 持有钥匙 -->
+        <div class="keys">
+            <p><span class="icon yellow"></span>：<span id="key-yellow">1</span></p>
+            <p><span class="icon blue"></span>：<span id="key-blue"></span></p>
+            <p><span class="icon red"></span>：<span id="key-red"></span></p>
+            <p id="menu"></p>
+            <p id="chuansong"></p>
+            <p id="items"></p>
+        </div>
+        <!-- 角色状态 -->
+        <div class="status">
+            <p>生命： <span id="status-hp"></span></p>
+            <p>攻击： <span id="status-attack"></span></p>
+            <p>防御： <span id="status-defense"></span></p>
+            <p>金钱： <span id="status-money"></span></p>
+        </div>
+
+
     </div>
 </div>
 
