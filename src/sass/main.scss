@@ -105,6 +105,12 @@ p{margin: 0;}
         height: 100%;
         animation: fadeIn 1s;
         overflow-y: scroll;
+        .green{ color: greenyellow; }
+        .orange{ color: orange; }
+        .yellow{ color: yellow; }
+        .margin-lr{
+            margin-right: 10px;
+        }
         p{
             text-indent: .7rem;
         }

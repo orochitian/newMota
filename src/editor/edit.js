@@ -55,6 +55,13 @@ $('#modal').on('click', '.grid', function () {
     if(  /^wall|upStair|downStair|anlei|transWall|airWall$/.test(choose)  ) {
         $this.addClass('active').addClass(choose);
         map.grid[current].type =  choose;
+    } else if( choose === 'shop' ) {
+        $this.prev().addClass('active').addClass('shop-left');
+        $this.next().addClass('active').addClass('shop-right');
+        $this.addClass('active').addClass(choose);
+        map.grid[current].type = choose;
+        map.grid[current-1].type = 'shopLeft';
+        map.grid[current+1].type = 'shopRight';
     } else if( choose === 'wiseMan' || choose === 'businessMan' || choose === 'thief') {
         opens({
             title: 'NPC编辑',

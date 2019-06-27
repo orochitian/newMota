@@ -1,5 +1,6 @@
 import {size} from "./Global";
 import render from './Render';
+import userItem from "./useItem";
 
 var oGame = document.getElementById('game');
 if( oGame ) {
@@ -11,12 +12,13 @@ if( oGame ) {
 function Core (hero, maps) {
     this.hero = hero;
     this.maps = maps;
-    this.mapIndex = 3;
+    this.mapIndex = 4;
 }
 
 Core.prototype.gameInit = function () {
     render.renderMap(this);
     render.renderStatus(this);
+    userItem(this);
     this.hero.init(this);
 }
 

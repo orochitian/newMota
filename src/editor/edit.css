@@ -3,12 +3,15 @@ body{background: #333;}
     width: 960px;
     margin: 0 auto;
 }
-#modal{width: 352px; overflow: hidden; color: #eee; background: url("../images/bg.png"); margin: 50px auto; box-shadow: 0 0 10px #fff; padding: 5px;}
+#modal{width: 352px; overflow: hidden; color: #eee; background: url("../images/bg.png"); margin: 50px auto; box-shadow: 0 0 10px #fff;}
 .grid{width: 32px; height: 32px; float: left; line-height: 32px; text-align: center; cursor: pointer;}
 
 .grid.active.wall{background: url("../images/wall.png");}
 .grid.active.transWall{background: url("../images/wall.png"); opacity: .5;}
 .grid.active.airWall{background: url("../images/wall.png"); opacity: .5;}
+.grid.active.shop{background: url("../images/shopCenter.png");}
+.grid.active.shop-left{background: url("../images/shopLeft.png");}
+.grid.active.shop-right{background: url("../images/shopRight.png");}
 .grid.active.anlei{background: darkred;}
 .grid.active.wiseMan{background: url("../images/npc/wiseMan.png");}
 .grid.active.businessMan{background: url("../images/npc/businessMan.png");}

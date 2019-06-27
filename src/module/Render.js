@@ -6,6 +6,7 @@ import monsters from './Monsters';
 import items from './Items';
 import npcs from './Npcs';
 import events from "./Events";
+import shop from './Shop';
 
 export default {
     draw: function (src, callback) {
@@ -171,6 +172,12 @@ export default {
             var mapGrid = map.grid[i];
             if( mapGrid.type === 'wall' || mapGrid.type === 'transWall' ) {
                 this.renderGrid(walls.wall, i);
+            } else if( mapGrid.type === 'shopLeft' ) {
+                this.renderGrid(shop.left, i);
+            } else if( mapGrid.type === 'shop' ) {
+                this.renderGrid(shop.center, i);
+            } else if( mapGrid.type === 'shopRight' ) {
+                this.renderGrid(shop.right, i);
             } else if( mapGrid.type === 'monster' ) {
                 this.renderGrid(monsters[mapGrid.id].img, i);
             } else if( mapGrid.type === 'gate' ) {

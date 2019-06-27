@@ -7,8 +7,8 @@ function getId(id) {
 
 export default function (core) {
     core.hero.disabled();
-    getId('event').style.opacity = 1;
-    getId('event').innerHTML = '';
+    getId('shop').style.display = 'block';
+    getId('shop').innerHTML = '';
     var price = 10 * core.shopTime * (core.shopTime-1) + 20;
 
     var inner = document.createElement('div');
@@ -24,14 +24,9 @@ export default function (core) {
     var hpBtn = document.createElement('button');
     var attackBtn = document.createElement('button');
     var defenseBtn = document.createElement('button');
-    var hpNum = core.shopTime*100;
-    if( core.mapIndex === 4 ) {
-        var attackNum = 2;
-        var defenseNum = 4;
-    } else if( core.mapIndex === 12 ) {
-        var attackNum = 4;
-        var defenseNum = 8;
-    }
+    var hpNum = core.shopTime * 100;
+    var attackNum = 2 * core.map.area;
+    var defenseNum = 4 * core.map.area;
     hpBtn.innerHTML = `增加${hpNum}点生命`;
     attackBtn.innerHTML = `增加${attackNum}点攻击`;
     defenseBtn.innerHTML = `增加${defenseNum}点防御`;

@@ -25,7 +25,7 @@ let moveInit = function (core, direct) {
 
 //  英雄原型
 function Hero () {
-    this.position = 112;
+    this.position = 109;
     this.img = heroSource;
     this.direction = 'down';
 

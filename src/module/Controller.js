@@ -3,6 +3,7 @@ import heroSource from '../images/hero.png';
 import items from './Items';
 import render from './Render';
 import events from './Events';
+import shop from './events/shop';
 
 var steps = 0;
 var heroImg = new Image();
@@ -53,6 +54,8 @@ export default {
             hero.disabled();
             var event = map.grid[nextGrid].event.split('-');
             events[event[0]][event[1]].action(core, nextGrid);
+        } else if( nextType === 'shop' ) {
+            shop(core);
         } else if( nextType == 'item' ) {
             if( /^item(04|05|06|07)$/.test(nextId) ) {
                 hero[items[nextId].for] += items[nextId].value * map.area;
@@ -91,6 +94,7 @@ export default {
             }
             //  判断周围是有具备触发暗雷条件的怪物
             //  守卫比较特殊，周围必须出现2个或2个以上的守卫才触发暗雷
+            // noinspection JSAnnotator
             function isRepeat() {
                 let repeat = 0;
                 for( let i=0; i<gridArr.length; i++ ) {
