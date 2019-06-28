@@ -1,4 +1,4 @@
-import tools from "../tools";
+import render from '../Render';
 
 function getId(id) {
     return document.getElementById(id);
@@ -7,32 +7,19 @@ function getId(id) {
 
 export default function (core) {
     core.hero.disabled();
-    getId('shop').style.display = 'block';
-    getId('shop').innerHTML = '';
     var price = 10 * core.shopTime * (core.shopTime-1) + 20;
-
-    var inner = document.createElement('div');
-    inner.id = 'event-inner';
-    var priceBlock = document.createElement('div');
-    priceBlock.id = 'price-block';
-    priceBlock.innerHTML = `花费${price}金币您可以：`;
-    var itemBlock = document.createElement('div');
-    itemBlock.id = 'item-block';
-    inner.appendChild(priceBlock);
-    inner.appendChild(itemBlock);
-
-    var hpBtn = document.createElement('button');
-    var attackBtn = document.createElement('button');
-    var defenseBtn = document.createElement('button');
+    var priceBlock = getId('price-block');
+    var hpBtn = getId('hp-btn');
+    var attackBtn = getId('attack-btn');
+    var defenseBtn = getId('defense-btn');
     var hpNum = core.shopTime * 100;
-    var attackNum = 2 * core.map.area;
-    var defenseNum = 4 * core.map.area;
+    var attackNum = 2 * core.maps[core.mapIndex].area;
+    var defenseNum = 4 * core.maps[core.mapIndex].area;
+
+    priceBlock.innerHTML = `花费${price}金币您可以：`;
     hpBtn.innerHTML = `增加${hpNum}点生命`;
     attackBtn.innerHTML = `增加${attackNum}点攻击`;
     defenseBtn.innerHTML = `增加${defenseNum}点防御`;
-    itemBlock.appendChild(hpBtn);
-    itemBlock.appendChild(attackBtn);
-    itemBlock.appendChild(defenseBtn);
 
     var buy = function () {
         core.shopTime++;
@@ -41,7 +28,7 @@ export default function (core) {
         hpNum = core.shopTime*100;
         priceBlock.innerHTML = `花费${price}金币您可以：`;
         hpBtn.innerHTML = `增加${hpNum}点生命`;
-        tools.domRender(core.hero, core.mapIndex);
+        render.renderStatus(core);
     }
 
     hpBtn.onclick = function () {
@@ -63,17 +50,11 @@ export default function (core) {
         }
     }
 
-
-    var closeBlock = document.createElement('div');
-    closeBlock.id = 'event-close-block';
-    var closeBtn = document.createElement('button');
-    closeBtn.innerText = '离开商店';
-    closeBtn.id = 'event-close';
+    var closeBtn = getId('close-shop');
     closeBtn.onclick = function () {
-        getId('event').style.opacity = 0;
-        core.hero.init();
+        getId('shop').style.visibility = 'hidden';
+        core.hero.init(core);
     }
-    closeBlock.appendChild(closeBtn);
-    getId('event').appendChild(inner);
-    getId('event').appendChild(closeBlock);
+
+    getId('shop').style.visibility = 'visible';
 }

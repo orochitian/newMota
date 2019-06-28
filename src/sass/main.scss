@@ -2,6 +2,41 @@ html,body{margin: 0; padding: 0; position: relative; height: 100%; user-select:n
 $screenSize: 97.78vw;
 $gridSize: 8.89vw;
 p{margin: 0;}
+
+#loading{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #F3C042 url("../images/loading.gif") no-repeat center;
+    color: rgba(0,0,0,.5);
+    z-index: 9999;
+    font-size: .4rem;
+    text-align: center;
+    span{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 30px;
+        margin: 0 auto;
+    }
+}
+
+//  图片预加载
+#preload{
+    visibility: hidden;
+    .controller{
+        .left{ background-image: url("../images/direction_left.png") }
+        .right{ background-image: url("../images/direction_right.png") }
+        .up{ background-image: url("../images/direction_up.png") }
+        .down{ background-image: url("../images/direction_down.png") }
+    }
+    .gates{
+        background-image: url("../images/gates.png");
+    }
+}
+
 @mixin center() {
     position: absolute;
     left: 0;
@@ -67,6 +102,31 @@ p{margin: 0;}
         animation: toggle .3s ease-in-out forwards;
     }
 }
+#shop{
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    #price-block{
+        font-size: .5rem;
+    }
+    #item-block{
+        width: 60vw;
+        margin: 0 auto;
+        button{
+            display: block;
+            width: 80%;
+            height: .8rem;
+            margin: .8rem auto;
+        }
+    }
+}
 #message{
     @include center;
     width: $screenSize;
@@ -124,24 +184,23 @@ p{margin: 0;}
     }
 }
 #fight{
-    display: none;
+    visibility: hidden;
+    box-shadow: 0 0 10px #000;
     @include center;
     width: $screenSize;
     height: $gridSize*6;
-    background: rgba(0, 0, 0, .8);
-    #monster,#animation,#hero{
-        float: left;
+    background: url("../images/fight.gif") no-repeat center;
+    background-size: 100%;
+    #monster, #hero{
         height: 100%;
+        background-color: rgba(0,0,0,.7);
     }
     #monster{
+        float: left;
         width: $gridSize*3.4;
     }
-    #animation{
-        width: $gridSize*4.19;
-        background: url("../images/fight.gif") no-repeat center;
-        background-size: cover;
-    }
     #hero{
+        float: right;
         width: $gridSize*3.4;
     }
     #monster-icon{

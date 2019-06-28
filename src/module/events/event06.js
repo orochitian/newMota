@@ -1,4 +1,4 @@
-import tools from "../tools";
+import render from "../Render";
 import businessMan from '../../images/npc/businessMan.png';
 import wiseMan from '../../images/npc/wiseMan.png';
 
@@ -9,31 +9,27 @@ export default [
     * */
     {
         msg: `
-           <span class="red"><img src="${businessMan}"></span>： 
+           <span><img src="${businessMan}"></span>： 
            我有一把蓝钥匙，你出50个金币就卖给你。<br>
          `,
         action: function (core, index) {
-            tools.confirmRender(this.msg, function () {
+            render.renderConfirm(this.msg, function () {
                 if( core.hero.money < 50 ) {
-                    tools.msgRender('金币不够');
-                    core.hero.init();
+                    render.renderMsg('金币不够');
+                    core.hero.init(core);
                     return;
                 }
-                var map = core.maps[core.mapIndex];
                 core.hero.money -= 50;
                 core.hero.blueKey++;
-                map.npc.splice(index, 1);
-                tools.domRender(core.hero, core.mapIndex);
-                core.render(map, core.hero);
-                var info = '魔塔一共50层（如果能做完的话。。。），每10层为一个区域。如果不打败此区域的头目就不能到更高的地方。'
-                tools.eventRender(info, function () {
-                    core.hero.init();
+                render.renderStatus(core);
+                var info = '魔塔一共50层（如果我能把游戏做完的话。。。），每10层为一个区域。如果不打败此区域的头目就不能到更高的地方。'
+                render.renderDialog(info, function () {
+                    render.clearGrid(core.maps[core.mapIndex], index);
+                    core.hero.init(core);
                 });
             }, function () {
-                core.hero.init();
-
+                core.hero.init(core);
             });
-            core.hero.disabled();
         }
     },
     /*
@@ -47,13 +43,10 @@ export default [
            <span class="blue">Ps：由于游戏制作初期没有考虑到二次事件的问题，所以改成购买物品完成后，商人直接就会告诉你一些消息。</span>
          `,
         action: function (core, index) {
-            tools.eventRender(this.msg, function () {
-                var map = core.maps[core.mapIndex];
-                map.npc.splice(index, 1);
-                core.render(map, core.hero);
-                core.hero.init();
+            render.renderDialog(this.msg, function () {
+                render.clearGrid(core.maps[core.mapIndex], index);
+                core.hero.init(core);
             });
-            core.hero.disabled();
         }
     }
 ]

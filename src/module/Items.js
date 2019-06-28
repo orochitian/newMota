@@ -6,6 +6,8 @@ import item05 from '../images/items/item05.png';
 import item06 from '../images/items/item06.png';
 import item07 from '../images/items/item07.png';
 import item08 from '../images/items/item08.png';
+import item11 from '../images/items/item11.png';
+import item12 from '../images/items/item12.png';
 
 
 export default {
@@ -56,5 +58,17 @@ export default {
         value: 1,
         img: item08,
         for: 'chuansong'
+    },
+    item11: {
+        name: '获得铁剑 攻击力加10',
+        value: 10,
+        img: item11,
+        for: 'attack'
+    },
+    item12: {
+        name: '获得铁盾 防御力加10',
+        value: 10,
+        img: item12,
+        for: 'defense'
     },
 }

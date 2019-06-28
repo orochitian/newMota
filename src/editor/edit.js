@@ -1,3 +1,22 @@
+// let a = [ 0, 0, 0 ];
+// let b = [ [ [2,0,0],[0,1,2],[1,2,3],[2,2,1] ] ];
+// //  [[0,0,0],[0,1,2],[0,2,3],[0,2,1]] 跟 [[2,0,0],[0,0,2],[1,0,3],[2,0,1]] 跟 [[2,0,0],[0,1,0],[1,2,0],[2,2,0]]
+//
+// let result = [];
+//
+// console.log('数组a:', a);
+// console.log('数组b:', b);
+//
+// for( let i=0; i<a.length; i++ ) {
+//     let tmp = Array.from(b[0]);
+//     for( let j=0; j<tmp.length; j++ ) {
+//         tmp[j] = b[0][j].concat();
+//         tmp[j][i] = a[i];
+//     }
+//     result.push(tmp);
+// }
+//
+// console.log('结果:', result);
 
 
 var choose = 'wall';

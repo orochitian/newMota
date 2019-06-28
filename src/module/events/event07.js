@@ -1,4 +1,4 @@
-import tools from "../tools";
+import render from "../Render";
 import businessMan from '../../images/npc/businessMan.png';
 
 export default [
@@ -12,27 +12,23 @@ export default [
            我有五把黄钥匙，你出50个金币就卖给你。<br>
          `,
         action: function (core, index) {
-            tools.confirmRender(this.msg, function () {
+            render.renderConfirm(this.msg, function () {
                 if( core.hero.money < 50 ) {
-                    tools.msgRender('金币不够');
-                    core.hero.init();
+                    render.renderMsg('金币不够');
+                    core.hero.init(core);
                     return;
                 }
-                var map = core.maps[core.mapIndex];
                 core.hero.money -= 50;
                 core.hero.yellowKey += 5;
-                map.npc.splice(index, 1);
-                tools.domRender(core.hero, core.mapIndex);
-                core.render(map, core.hero);
+                render.renderStatus(core);
                 var info = '在商店里你最好选择提升防御，只有在攻击力低于敌人的防御力时才提升攻击力。'
-                tools.eventRender(info, function () {
-                    core.hero.init();
+                render.renderDialog(info, function () {
+                    render.clearGrid(core.maps[core.mapIndex], index);
+                    core.hero.init(core);
                 });
             }, function () {
-                core.hero.init();
-
+                core.hero.init(core);
             });
-            core.hero.disabled();
         }
     }
 ]

@@ -62,7 +62,6 @@ export default [
                 core.hero.monsterMenu++;
                 render.renderMsg('获得怪物手册');
                 core.hero.init(core);
-
             });
         }
     }

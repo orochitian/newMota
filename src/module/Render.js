@@ -16,6 +16,9 @@ export default {
             callback(oImg);
         }
     },
+    setGrid(map, gridObj) {
+        map.grid[gridObj.i] = gridObj;
+    },
     delete: function (map, index) {
         map.grid[index] = {i: index};
     },
@@ -54,7 +57,7 @@ export default {
         document.getElementById('hero-hp').innerHTML = hero.hp;
         document.getElementById('hero-attack').innerHTML = hero.attack;
         document.getElementById('hero-defense').innerHTML = hero.defense;
-        oFight.style.display = 'block';
+        oFight.style.visibility = 'visible';
         var timmer = null;
         var times = 0;
         var monsterHp = monster.hp;
@@ -70,7 +73,7 @@ export default {
                 document.getElementById('hero-hp').innerHTML = heroHp;
             }
             if( times === heroHitTimes ) {
-                oFight.style.display = 'none';
+                oFight.style.visibility = 'hidden';
                 _this.renderMsg('战斗胜利，获得' + monster.money + '金币');
 
                 //  战胜怪物后开门的逻辑
@@ -260,12 +263,10 @@ export default {
             steps++;
             setTimeout(function () {
                 animate();
-            }, 60);
+            }, 70);
         }
-        requestAnimationFrame(animate);
-        setTimeout(function () {
-            hero.disabled();
-        }, 10);
+        animate();
+        hero.disabled();
         this.delete(map, index);
     }
 }

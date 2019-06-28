@@ -12,8 +12,17 @@
     <title>魔塔</title>
 </head>
 <body>
-
+<div id="loading"><span>游戏资源加载中...</span></div>
 <div id="size"></div>
+<div id="preload">
+    <div class="controller">
+        <span class="left"></span>
+        <span class="right"></span>
+        <span class="up"></span>
+        <span class="down"></span>
+    </div>
+    <div class="gates"></div>
+</div>
 
 <div id="screen">
     <!-- 游戏主画面 -->
@@ -25,7 +34,17 @@
     <!-- 伤害弹层 -->
     <div id="hurt"></div>
     <!-- 商店弹层 -->
-    <div id="shop"></div>
+    <div id="shop">
+        <div class="inner">
+            <div id="price-block">花费20金币您可以：</div>
+            <div id="item-block">
+                <button id="hp-btn"></button>
+                <button id="attack-btn"></button>
+                <button id="defense-btn"></button>
+                <button id="close-shop">离开商店</button>
+            </div>
+        </div>
+    </div>
     <!-- 战斗画面 -->
     <div id="fight">
         <div id="monster">
@@ -34,7 +53,7 @@
             <div id="monster-attack" class="row attack">12</div>
             <div id="monster-defense" class="row defense">33</div>
         </div>
-        <div id="animation"></div>
+        <!--<div id="animation"></div>-->
         <div id="hero">
             <div id="hero-icon"></div>
             <div id="hero-hp" class="row hp">400</div>

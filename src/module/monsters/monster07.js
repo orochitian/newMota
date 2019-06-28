@@ -1,4 +1,4 @@
-import monster from '../../images/monsters/monster06.png';
+import monster from '../../images/monsters/monster07.png';
 
 export default {
     name: '初级卫兵',
