@@ -65,6 +65,7 @@ export default {
             render.renderMsg(items[nextId].name);
             render.delete(map, nextGrid);
         } else if( nextType == 'event' ) {
+            core.save('auto');
             var event = nextId.split('-');
             events[event[0]][event[1]].action(core, nextGrid);
             hero.disabled();
@@ -74,12 +75,14 @@ export default {
             hero.disabled();
             render.renderMap(core);
             hero.init(core);
+            core.save('auto');
         } else if( nextType === 'downStair' ) {
             core.mapIndex--;
             hero.position = core.maps[core.mapIndex].upDown;
             hero.disabled();
             render.renderMap(core);
             hero.init(core);
+            core.save('auto');
         } else if( nextType === 'anlei' ) {
             let grids = Object.values(getArea(nextGrid));
             let gridArr = [];
