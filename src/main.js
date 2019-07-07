@@ -6,7 +6,7 @@ import hero from './module/Hero';
 window.onload = function () {
     setTimeout(() => {
         document.getElementById('loading').style.display = 'none';
-    }, 500);
+    }, 1000);
 }
 
 var game = new core(hero, maps);
