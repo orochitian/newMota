@@ -14,7 +14,7 @@ function Core (hero, maps) {
     this.hero = hero;
     this.maps = maps;
     this.shopTime = 1;
-    this.mapIndex = 1;
+    this.mapIndex = 11;
 }
 
 Core.prototype.gameInit = function () {

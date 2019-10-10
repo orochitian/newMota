@@ -8,6 +8,8 @@ import item07 from '../images/items/item07.png';
 import item08 from '../images/items/item08.png';
 import item11 from '../images/items/item11.png';
 import item12 from '../images/items/item12.png';
+import item13 from '../images/items/item13.png';
+import item14 from '../images/items/item14.png';
 
 
 export default {
@@ -69,6 +71,12 @@ export default {
         name: '获得铁盾 防御力加10',
         value: 10,
         img: item12,
+        for: 'defense'
+    },
+    item14: {
+        name: '获得银盾 防御力加20',
+        value: 20,
+        img: item14,
         for: 'defense'
     },
 }
