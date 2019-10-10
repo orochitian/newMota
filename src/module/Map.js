@@ -13,8 +13,8 @@ import map11 from './maps/map11';
 import map12 from './maps/map12';
 import map13 from './maps/map13';
 import map14 from './maps/map14';
-import map15 from './maps/map15';
 import map16 from './maps/map16';
+import map15 from './maps/map15';
 import map17 from './maps/map17';
 import map18 from './maps/map18';
 
